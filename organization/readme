@@ -1,0 +1,7 @@
+sudo -u postgres psql
+create database organization;
+create user sankalp with encrypted password 'sankalp';
+grant all privileges on database organization to sankalp;
+
+sudo apt-get install libpq-dev python3.8-dev
+

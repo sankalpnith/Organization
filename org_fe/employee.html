@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <!-- Required meta tags -->
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+
+    <title>Employee</title>
+  </head>
+  <body onload="onStart();">
+  	<div style="float: right;">
+	<span id="userName"></span><br><span id="roleName"></span><br>
+	<input type="button" class="fadeIn fourth" value="Logout" onclick="UserLogout();">
+	</div>
+	
+  	<input id="empButton" type="button" onclick = "showEmpTable();" name = "empButton" value = "Employees" style="display: none;" />
+  	<input id="roomButton" type = "button" onclick = "showRoomTable();" name = "roomButton" value = "Rooms" style="display: none;" />
+
+<div id="editEmpModal" class="modal" style="padding-top: 100px">
+	 <h4 class = "modal-title" style="background-color:grey;">Edit Employee</h4>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="closeEditEmp">&times;</span>
+    <span><b>Employee Id</b> </span> <input id="emp_id" readonly />
+    <span><b>Name </b></span><input id="name"/>
+    <span><b>Email</b> </span><input id="email"/>
+    <span><b>Mobile Number </b></span><input id="mobile_number"/>
+    <span><b>Team </b></span><input id="team"/>
+    <span><b>Position </b></span><input id="position"/>
+    <span><b>Role</b> </span><select size="1" id="role"></select><br>
+    <input id="EditEmp" type = "button" value = "Save" />
+  </div>
+
+</div>
+
+<div id="createEmpModal" class="modal" style="padding-top: 100px">
+	 <h4 class = "modal-title" style="background-color:grey;">New Employee</h4>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="closeCreateEmp">&times;</span>
+    <span><b>Employee Id</b> </span> <input id="create_emp_id"/>
+    <span><b>Name </b></span><input id="create_name"/>
+    <span><b>Email</b> </span><input id="create_email"/>
+    <span><b>Mobile Number </b></span><input id="create_mobile_number"/>
+    <span><b>Team </b></span><input id="create_team"/>
+    <span><b>Position </b></span><input id="create_position"/>
+    <span><b>Role</b> </span><select size="1" id="create_role"></select><br>
+    <input id="CreateEmp" type = "button" value = "Save" />
+  </div>
+
+</div>
+
+<div id="createRoomModal" class="modal" style="padding-top: 100px">
+<h4 class = "modal-title" style="background-color:grey;">New Room</h4>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="closeCreateRoom">&times;</span>
+    <span><b>Room Id</b> </span> <input id="create_room_id" />
+    <span><b>Name </b></span><input id="create_room_name"/>
+    <span><b>Booking Email</b> </span><input id="create_booking_email"/>
+    <span><b>Sitting Capacity</b></span><input id="create_capacity"/><br>
+    <input id="createRoom" type = "button" value = "Save" />
+  </div>
+
+</div>
+
+<div id="editRoomModal" class="modal" style="padding-top: 100px">
+<h4 class = "modal-title" style="background-color:grey;">Edit Room</h4>
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="closeEditRoom">&times;</span>
+    <span><b>Room Id</b> </span> <input id="edit_room_id" readonly />
+    <span><b>Name </b></span><input id="edit_room_name"/>
+    <span><b>Booking Email</b> </span><input id="edit_booking_email"/>
+    <span><b>Sitting Capacity</b></span><input id="edit_capacity"/><br>
+    <input id="editRoom" type = "button" value = "Save" />
+  </div>
+
+</div>
+
+<div id="emp_table_div" style="display: none;">
+	 <input id="addEmpButton" type = "button" onclick = "openAddEmployeeModal();" value = "New Employee" style="display: none;" />
+  	<table class="table table-borderless table-striped table-earning">
+  <thead>
+    <tr>
+      <th>Employee Id</th>
+      <th>Name</th>
+      <th>Email</th>
+      <th>Mobile Number</th>
+      <th>Position</th>
+      <th>Team</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="emp_body"></tbody>
+</table>
+</div>
+<div id="room_table_div" style="display: none;">
+	<input id="addRoomButton" type = "button" onclick = "openAddRoomModal();" value = "New Room" />
+<table class="table table-borderless table-striped table-earning">
+  <thead>
+    <tr>
+      <th>Room Id</th>
+      <th>Name</th>
+      <th>Booking Email</th>
+      <th>Sitting</th>
+      <th>Status</th>
+      <th>Actions</th>
+    </tr>
+  </thead>
+  <tbody id="room_body"></tbody>
+</table>
+</div>
+    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl" crossorigin="anonymous"></script>
+    <script src= "https://unpkg.com/bootstrap-table@1.16.0/dist/bootstrap-table.min.js"></script>
+    <script src = "javascript/emp_scripts.js" type = "text/javascript"/></script>
+
+  </body>
+</html>
