@@ -118,6 +118,8 @@ function openAddEmployeeModal() {
              listEmployees();
              modal.style.display = "none";
              
+         }else if(this.readyState === 4){
+         	alert(this.responseText)
          }
     };
     xhttp.open("POST", url + "employees/", true);
