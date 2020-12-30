@@ -13,7 +13,6 @@ function UserLogin() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
          if (this.readyState === 4 && this.status == 201) {
-             console.log(this.responseText)
              var obj = JSON.parse(this.responseText)
              window.sessionStorage.setItem("token", obj.token)
              window.sessionStorage.setItem("userId", obj.userId)
@@ -21,6 +20,8 @@ function UserLogin() {
              window.sessionStorage.setItem("role", obj.role)
              window.sessionStorage.setItem("permissions", obj.permissions)
              window.location.href = "employee.html"
+         }else if (this.readyState === 4){
+         	alert(this.responseText)
          }
     };
     xhttp.open("POST", url + "login/", true);
@@ -33,7 +34,6 @@ function UserLogout() {
     var xhttp = new XMLHttpRequest();
     xhttp.onreadystatechange = function() {
          if (this.readyState === 4 && this.status == 204) {
-         	console.log("logout done")
              window.sessionStorage.clear()
              window.location.href = "index.html"
          }
@@ -59,7 +59,6 @@ function onStart(){
     xhttp.send();
 
     roomButton = document.getElementById("roomButton");
-    console.log(window.sessionStorage.getItem("permissions"))
     if (window.sessionStorage.getItem("permissions").includes(room_read)){
     	roomButton.style.display="block"
     }
@@ -116,7 +115,6 @@ function openAddEmployeeModal() {
 	var mydata = []
     xhttp.onreadystatechange = function() {
          if (this.readyState === 4 && this.status == 201) {
-             console.log(JSON.parse(this.responseText))
              listEmployees();
              modal.style.display = "none";
              
@@ -202,13 +200,13 @@ function listEmployees() {
 }
 
 function deleteEmpRow(id){
-	console.log(id)
 	var xhttp = new XMLHttpRequest();
 	var mydata = []
     xhttp.onreadystatechange = function() {
          if (this.readyState === 4 && this.status == 204) {
-             console.log(this.responseText)
              listEmployees()
+         }else if (this.readyState === 4){
+         	alert("Delete Failed")
          }
     };
     xhttp.open("DELETE", url + "employees/"+ id+ "/", true);
@@ -235,15 +233,12 @@ function openEditEmployeeModal(item) {
 	var select = document.getElementById("role")
 	select.innerHTML=""
 	roles = JSON.parse(window.sessionStorage.getItem("roles"))
-	console.log(item.role_id)	
 	for(var i=0; i<roles.length; i++){
 		opt = document.createElement("option");
 		opt.value = roles[i].id;
 		opt.textContent = roles[i].name;
 		select.appendChild(opt);
-		console.log(opt.value)
 		if(opt.value === item.role_id){
-			console.log("matched")
 			select.options[i].selected=true
 		}
 	}
@@ -263,6 +258,8 @@ function openEditEmployeeModal(item) {
              listEmployees();
              modal.style.display = "none";
              
+         }else if (this.readyState === 4){
+         	alert(this.responseText)
          }
     };
     xhttp.open("PUT", url + "employees/" + item.id + "/", true);
@@ -287,7 +284,6 @@ function listRooms() {
 	var mydata = []
     xhttp.onreadystatechange = function() {
          if (this.readyState === 4 && this.status == 200) {
-             console.log(JSON.parse(this.responseText))
              mydata = JSON.parse(this.responseText)
              const table = document.getElementById("room_body");
              table.innerHTML=""
@@ -325,8 +321,9 @@ function deleteRoomRow(id){
 	var mydata = []
     xhttp.onreadystatechange = function() {
          if (this.readyState === 4 && this.status == 204) {
-             console.log(this.responseText)
              listRooms()
+         }else if (this.readyState === 4){
+         	alert("Delete Failed")
          }
     };
     xhttp.open("DELETE", url + "rooms/"+ id+ "/", true);
@@ -356,10 +353,11 @@ function openAddRoomModal() {
 	var mydata = []
     xhttp.onreadystatechange = function() {
          if (this.readyState === 4 && this.status == 201) {
-             console.log(JSON.parse(this.responseText))
              listRooms();
              modal.style.display = "none";
              
+         }else if (this.readyState === 4){
+         	alert(this.responseText)
          }
     };
     xhttp.open("POST", url + "rooms/", true);
@@ -402,6 +400,8 @@ function openEditRoomModal(item) {
              listRooms();
              modal.style.display = "none";
              
+         }else if (this.readyState === 4){
+         	alert(this.responseText)
          }
     };
     xhttp.open("PUT", url + "rooms/" + item.id + "/", true);
