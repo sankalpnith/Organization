@@ -84,6 +84,14 @@ function openAddEmployeeModal() {
 	var span = document.getElementsByClassName("closeCreateEmp")[0];
   	modal.style.display = "block";
 
+	document.getElementById("create_emp_id").value = "";
+  	document.getElementById("create_name").value = "";
+  	document.getElementById("create_email").value = "";
+  	document.getElementById("create_mobile_number").value = "";
+  	document.getElementById("create_team").value = "";
+	document.getElementById("create_position").value = "";
+
+
   	var select = document.getElementById("create_role")
 	select.innerHTML=""
 	roles = JSON.parse(window.sessionStorage.getItem("roles"))	
@@ -331,6 +339,11 @@ function openAddRoomModal() {
 	var modal = document.getElementById("createRoomModal");
 	var span = document.getElementsByClassName("closeCreateRoom")[0];
   	modal.style.display = "block";
+
+  	document.getElementById("create_room_id").value = "";
+  	document.getElementById("create_room_name").value = "";
+  	document.getElementById("create_booking_email").value = "";
+  	document.getElementById("create_capacity").value = "";
 
 	var save = document.getElementById("createRoom");
 	save.onclick = function(){
