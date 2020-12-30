@@ -61,7 +61,8 @@ class EmployeeSerializer(serializers.ModelSerializer):
         role = validated_data.pop('role', None)
         with transaction.atomic():
             user = super().create(validated_data)
-
+            user.set_password("Test@123")
+            user.save()
             user_role_data = {'role': role.id, 'user': user.id}
             user_role_relationships = UserRoleRelationshipSerializer(
                 data=user_role_data,

@@ -87,6 +87,15 @@ class Command(BaseCommand):
                 'position': 'Director Engineering',
                 'role': 'OFFICE MANAGER',
                 'team': 'Management',
+            },
+            {
+                'emp_id': 'D001',
+                'email': 'default@gmail.com',
+                'name': 'Default User',
+                'mobile_number': '5678901236',
+                'position': 'SDE',
+                'role': 'DEFAULT',
+                'team': 'Developer',
             }
         ]
 
@@ -100,7 +109,7 @@ class Command(BaseCommand):
                 position=user_dict['position'],
                 team=user_dict['team'],
             )
-            u.set_password("Testing")
+            u.set_password("Test@123")
             u.save()
             UserRoleRelationship.objects.create(
                 user=u,
